@@ -1,0 +1,46 @@
+.sidebar_cont{
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: grid;
+    grid-template-rows: 20% 80%;
+    box-shadow: 0px 0px 3px 0px #24941d;
+    z-index: 1;
+}
+
+.image_holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo_icon{
+    width: 80%;
+    margin-top: 10%;
+}
+
+.content_holder{
+    align-self: center;
+    display: grid;
+}
+
+.cont1{
+    display: block;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #077707;
+}
+
+.cont2{
+    text-align: center;
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: #7d7d7d;
+    line-height: normal;
+    font-style: oblique;
+    width: 82%;
+    margin-left: 10%;
+}

@@ -1,0 +1,36 @@
+{
+  "short_name": "Testing tool",
+  "name": "Testing tool",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs",
+    "debugger",
+    "webRequest",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "./app-view/src/backgroundScripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "app-view/build/index.html",
+    "default_icon": {
+      "16": "/images/icon.png",
+      "32": "/images/icon.png",
+      "48": "/images/icon.png",
+      "128": "/images/icon.png"
+    }
+  },
+  "icons": {
+    "16": "/images/icon.png",
+    "32": "/images/icon.png",
+    "48": "/images/icon.png",
+    "128": "/images/icon.png"
+  }
+}

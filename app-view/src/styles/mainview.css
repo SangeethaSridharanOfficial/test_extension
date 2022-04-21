@@ -1,0 +1,42 @@
+.mainview_cont{
+    background-color: #f8f8f8;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 20% 80%;
+}
+
+.recording_holder{
+    align-self: center;
+    justify-self: center;
+    background-color: white;
+    padding: 2% 8%;
+    box-shadow: 0px 0px 6px -2px #4aa94a;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header > .app_link{
+    background-color: white;
+    border: 1px solid #13b113;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0px 0px 7px -3px;
+    padding: 3px 10px;
+    margin-right: 10px;
+    color: #077f07;
+    font-weight: bold;
+}
+
+.app_link > img{
+    width: 25px;
+}
+
+.btn{
+    width: 25px;
+}
