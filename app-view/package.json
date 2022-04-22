@@ -21,7 +21,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cross-env INLINE_RUNTIME_CHUNK=false react-scripts build && move ./build/static ../",
+    "win-build": "cross-env INLINE_RUNTIME_CHUNK=false react-scripts build && move ./build/static ../",
+    "mac-build": "cross-env INLINE_RUNTIME_CHUNK=false react-scripts build && mv ./build/static ../",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

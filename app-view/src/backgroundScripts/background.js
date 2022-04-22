@@ -6,54 +6,54 @@ var urls = [
   "https://preview.open4business.io/preview/uservices/1.0.2/signin/*"
 ]
 
-const readResponse = () => {
-  chrome.tabs.query( //get current Tab
-    {
-        currentWindow: true,
-        active: true
-    },
-    function(tabArray) {
-        currentTab = tabArray[0];
-        chrome.debugger.attach({ //debug at current tab
-            tabId: currentTab.id
-        }, version, onAttach.bind(null, currentTab.id));
-    }
-  )
-}
+// const readResponse = () => {
+//   chrome.tabs.query( //get current Tab
+//     {
+//         currentWindow: true,
+//         active: true
+//     },
+//     function(tabArray) {
+//         currentTab = tabArray[0];
+//         chrome.debugger.attach({ //debug at current tab
+//             tabId: currentTab.id
+//         }, version, onAttach.bind(null, currentTab.id));
+//     }
+//   )
+// }
 
 
 
-function onAttach(tabId) {
+// function onAttach(tabId) {
 
-    chrome.debugger.sendCommand({ //first enable the Network
-        tabId: tabId
-    }, "Network.enable");
+//     chrome.debugger.sendCommand({ //first enable the Network
+//         tabId: tabId
+//     }, "Network.enable");
 
-    chrome.debugger.onEvent.addListener(allEventHandler);
+//     chrome.debugger.onEvent.addListener(allEventHandler);
 
-}
+// }
 
 
-function allEventHandler(debuggeeId, message, params) {
+// function allEventHandler(debuggeeId, message, params) {
 
-    if (currentTab.id != debuggeeId.tabId) {
-        return;
-    }
+//     if (currentTab.id != debuggeeId.tabId) {
+//         return;
+//     }
 
-    if (message == "Network.responseReceived") { //response return 
-        chrome.debugger.sendCommand({
-            tabId: debuggeeId.tabId
-        }, "Network.getResponseBody", {
-            "requestId": params.requestId
-        }, function(response) {
-            console.log("Response ", response);
-            // you get the response body here!
-            // you can close the debugger tips by:
-            chrome.debugger.detach(debuggeeId);
-        });
-    }
+//     if (message == "Network.responseReceived") { //response return 
+//         chrome.debugger.sendCommand({
+//             tabId: debuggeeId.tabId
+//         }, "Network.getResponseBody", {
+//             "requestId": params.requestId
+//         }, function(response) {
+//             console.log("Response ", response);
+//             // you get the response body here!
+//             // you can close the debugger tips by:
+//             chrome.debugger.detach(debuggeeId);
+//         });
+//     }
 
-}
+// }
 
 const updateListener = (tabId, changeInfo, tab) => {
   if (changeInfo.url) {
@@ -100,7 +100,7 @@ chrome.runtime.onMessage.addListener(
                   }]
                 };
                 chrome.tabs.onUpdated.addListener(updateListener);
-                readResponse();
+                // readResponse();
                 break;
             case "getRecordingName":
                 console.log('tabs ', message, tabData[message.id]);
@@ -126,5 +126,3 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
-
-window.testRecordings = {};

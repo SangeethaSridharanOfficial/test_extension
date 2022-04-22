@@ -5,7 +5,7 @@ const Sidebar = () => {
     return (
         <div className='sidebar_cont'>
             <div className="image_holder">
-                <img className='logo_icon' src="https://ik.imagekit.io/ofb/ofb/dev/OFBLogo_ccxPqKWYrw.png?tr=dpr-2,pr-true,f-auto,w-180" alt="logo"></img>
+                <img className='logo_icon' src="https://ik.imagekit.io/ofb/ac/assets/Avetti-Commerce-Logo-2022_SH9BJ4QUi.png?tr=w-150" alt="logo"></img>
             </div>
             <div className='content_holder'>
                 <span className='content cont1'>Good Day!!</span>

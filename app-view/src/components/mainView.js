@@ -9,8 +9,9 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const MainView = () => {
-    const [recordingName, setRecordingName] = useState('');
+    const [recordingName, setRecordingName] = useState(`${new Date().toLocaleDateString()}_Recording`);
     const [initVal, setInitVal] = useState('');
+    const [animate, setAnimate] = useState(false);
     const RECORDING = gql`
       mutation($name: String, $startTime: Float, $endTime: Float, $urlInfoList: [UrlInfoInput]){
         addRecording(input: {
@@ -30,15 +31,21 @@ const MainView = () => {
             if (name) {
                 console.log("coming to anme: ", name);
                 setInitVal(name);
+                message.destroy();
+                message.info('Recording in progress!');
             }
 
         }).catch(err => {
             console.error("Error in getRecordingName Function ", err);
         })
+        return(() => {
+            setAnimate(false);
+        })
     }, []);
 
     if (loading) {
         console.log("Loading......");
+        message.destroy();
         message.loading("Loading....");
     }
 
@@ -50,9 +57,6 @@ const MainView = () => {
 
     return (
         <div className='mainview_cont'>
-            <div className='header'>
-                <a className='app_link' href="http://localhost:3000/recording" target={"_blank"}>{`Go to app `}<img src={require('../appIcon.jpg')}></img></a>
-            </div>
             <div className='recording_holder'>
                 <Form
                     layout="vertical"
@@ -73,10 +77,12 @@ const MainView = () => {
                         ]}
                     >
                         {
-                            (initVal) ? <Input type="text" disabled={true} placeholder={initVal} /> :
+                            (initVal) ? <Input type="text" autoFocus disabled={true} placeholder={initVal} /> :
                                 <Input
                                     placeholder="Name your recording"
                                     type="text"
+                                    autoFocus
+                                    defaultValue={`${new Date().toLocaleDateString()}_Recording`}
                                     onChange={e => setRecordingName(e.target.value)}
                                     value={recordingName} maxLength={20} />
                         }
@@ -92,6 +98,8 @@ const MainView = () => {
                                     if (recordingName.length < 5) return;
                                     setInitVal(recordingName);
                                     isStarted = await start(recordingName);
+                                    message.destroy();
+                                    message.info('Recording Started!!');
                                     console.log("Success ", isStarted)
                                 } catch (err) {
                                     message.destroy();
@@ -117,11 +125,13 @@ const MainView = () => {
                                                         variables: recordings
                                                     })
                                                     message.destroy();
-                                                    message.success("Saved Successfully!!");
+                                                    message.success("Saved Successfully!! Click on Manage Loadtest to start the load test");
                                                     console.log("resp ", resp);
                                                     setInitVal('');
-                                                    setRecordingName('');
+                                                    setRecordingName(`${new Date().toLocaleDateString()}_Recording`);
                                                     isStarted = false;
+                                                    setAnimate(true);
+                                                    setTimeout(() => setAnimate(false), 400);
                                                 }
                                             }
                                           },
@@ -130,10 +140,12 @@ const MainView = () => {
                                             onClick: async() => {
                                                 let recordings = await stopAndSave();
                                                 message.destroy();
-                                                message.warn("You can try again!!");
+                                                message.info('You can try again! or Click on "Manage Loadtest" to manage your saved recordings');
                                                 setInitVal('');
-                                                setRecordingName('');
+                                                setRecordingName(`${new Date().toLocaleDateString()}_Recording`);
                                                 isStarted = false;
+                                                setAnimate(true);
+                                                setTimeout(() => setAnimate(false), 400);
                                             }
                                           }
                                         ]
@@ -150,6 +162,9 @@ const MainView = () => {
                         </Space>
                     </Form.Item>
                 </Form>
+            </div>
+            <div className='header'>
+                <a className={`app_link ${animate ? 'animate1' : 'animate2'}`} href="http://localhost:3000/" target={"_blank"}>{`Manage Loadtest `}<img src={require('../appIcon.jpg')}></img></a>
             </div>
         </div>
     )

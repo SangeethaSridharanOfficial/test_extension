@@ -2,7 +2,7 @@
     background-color: #f8f8f8;
     height: 100%;
     display: grid;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 80% 20%;
 }
 
 .recording_holder{
@@ -39,4 +39,16 @@
 
 .btn{
     width: 25px;
+}
+
+.animate1{
+    transition: all 0.3s;
+    opacity: 0.5;
+    transform: scale(0.7,0.7);
+    
+}
+.animate2{
+    transition: all 0.3s;
+    opacity: 1;
+    transform: scale(1,1);
 }
